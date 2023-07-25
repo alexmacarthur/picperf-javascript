@@ -1,6 +1,6 @@
 {
   "name": "@picperf/rehype",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/cjs/packages/rehype/index.js",
   "module": "dist/esm/packages/rehype/index.js",
@@ -16,13 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "hast-util-to-html": "^8.0.4",
-    "rehype": "^12.0.1",
     "rehype-parse": "^8.0.4",
-    "rehype-resolution": "^1.0.2",
     "rehype-stringify": "^9.0.3",
-    "remark-html": "^15.0.2",
-    "remark-parse": "^10.0.2",
-    "remark-rehype": "^10.1.0",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
