@@ -16,7 +16,7 @@ export function rehypePicPerf(
   const propertiesToTransform = ["src", "srcSet", "dataSrc", "dataSrcset"];
 
   return async (ast) => {
-    const { visit } = await import("unist-util-visit");
+    const { visit } = await import('unist-util-visit');
 
     visit(ast, "element", (node) => {
       const tag = (node.tagName || "").toLowerCase();
