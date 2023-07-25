@@ -1,0 +1,28 @@
+{
+  "name": "picperf-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "format": "prettier --write \"**/*.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexmacarthur/picperf-javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexmacarthur/picperf-javascript/issues"
+  },
+  "homepage": "https://github.com/alexmacarthur/picperf-javascript#readme",
+  "devDependencies": {
+    "lerna": "^7.1.4",
+    "prettier": "^3.0.0"
+  },
+  "dependencies": {
+    "vitest": "^0.33.0"
+  }
+}
