@@ -6,7 +6,7 @@
   "module": "dist/esm/packages/rehype/index.js",
   "types": "dist/types/packages/rehype/index.d.ts",
   "scripts": {
-    "test": "vitest run", 
+    "test": "vitest run",
     "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
     "build:esm": "tsc --module es2020 --outDir dist/esm",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
@@ -27,5 +27,9 @@
   },
   "devDependencies": {
     "unified": "^10.1.2"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "ba29d14e7e1f536472bd4b6164ab8a11467c247a"
 }
