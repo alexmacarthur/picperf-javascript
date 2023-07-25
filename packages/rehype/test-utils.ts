@@ -3,14 +3,14 @@ import { rehype } from "rehype";
 import remarkParse from "remark-parse";
 import rehypeParse from "rehype-parse";
 import remarkRehype from "remark-rehype";
+import rehypeResolution from "rehype-resolution";
 import rehypeStringify from "rehype-stringify";
+import remarkHtml from "remark-html";
 
 export async function parse(markdown: string) {
-  const ast = unified().use(remarkParse).parse(markdown);
-
-  return JSON.stringify(ast, null, 2);
+  return unified().use(remarkParse).parse(markdown);
 }
 
-export function stringify(ast: any): string {
-  return unified().use(rehypeStringify).stringify(ast);
+export async function stringify(ast: any): Promise<string> {
+  return unified().use(rehypeParse).use(remarkHtml).stringify(ast);
 }

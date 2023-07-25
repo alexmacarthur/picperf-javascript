@@ -1,18 +1,26 @@
 import { visit } from "unist-util-visit";
+import { transform } from "../../shared/transform";
 
-export const rehypePicPerf =
-  (options = {}) =>
-  (ast) => {
-    function visitor(node) {
-      const {
-        tagName,
-        properties: { src, srcSet },
-      } = node;
+interface Options {
+  shouldTransform: (url: string) => boolean;
+}
 
-      if (tagName !== "img") return;
+const defaultOptions: Options = {
+  shouldTransform: (url) => url.startsWith("http"),
+};
 
-      node.properties.src = "https://via.placeholder.com/150";
-    }
+export function rehypePicPerf(
+  options: Options = defaultOptions,
+): (ast: any) => void {
+  const mergedOptions = { ...defaultOptions, ...options };
 
-    visit(ast, ["element"], visitor);
+  return (ast) => {
+    visit(ast, ["image"], (node) => {
+      if (!mergedOptions.shouldTransform(node.url)) {
+        return;
+      }
+
+      node.url = transform(node.url);
+    });
   };
+}
