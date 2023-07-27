@@ -51,10 +51,24 @@ describe("absolute paths", () => {
 describe("non-HTTP paths", () => {
   it("should not prefix URL for relative paths", async () => {
     const ast = await parse(`<img src="./image.png" alt="my alt">`);
-    await rehypePicPerf()(ast);
+    await rehypePicPerf({
+      // host: "https://some-image.com",
+    })(ast);
     const result = await stringify(ast);
 
     expect(result).toContain(`<img src="./image.png" alt="my alt">`);
+  });
+
+  it("should prefix URL for relative paths when host is given", async () => {
+    const ast = await parse(`<img src="./image.png" alt="my alt">`);
+    await rehypePicPerf({
+      host: "https://some-image.com",
+    })(ast);
+    const result = await stringify(ast);
+
+    expect(result).toContain(
+      `<img src="https://picperf.dev/https://some-image.com/image.png" alt="my alt">`,
+    );
   });
 
   it("should not prefix URL for root paths", async () => {

@@ -2,6 +2,7 @@
   "name": "@picperf/rehype",
   "version": "0.0.4",
   "description": "",
+  "license": "ISC",
   "main": "dist/cjs/packages/rehype/index.js",
   "module": "dist/esm/packages/rehype/index.js",
   "types": "dist/types/packages/rehype/index.d.ts",
@@ -13,7 +14,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "dependencies": {
     "@brillout/import": "^0.2.3",
     "hast-util-to-html": "^8.0.4",

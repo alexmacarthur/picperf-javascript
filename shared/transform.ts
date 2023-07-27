@@ -1,24 +1,28 @@
+import { buildImageUrl } from "./buildImageUrl";
+
 const PREFIX = "https://picperf.dev";
 
-export function transform(value: string) {
-  if (!value.startsWith("http")) {
-    return value;
+export function transform(path: string, host?: string) {
+  const url = host ? buildImageUrl(host, path) : path;
+
+  if (!url.startsWith("http")) {
+    return url;
   }
 
-  if (value.startsWith(PREFIX)) {
-    return value;
+  if (url.startsWith(PREFIX)) {
+    return url;
   }
 
-  return `${PREFIX}/${value}`;
+  return `${PREFIX}/${url}`;
 }
 
-export function transformSrcset(value: string) {
+export function transformSrcset(value: string, host?: string) {
   return value
     .split(",")
     .map((src) => {
       const [url, size] = src.trim().split(" ");
 
-      return `${transform(url)} ${size}`;
+      return `${transform(url, host)} ${size}`;
     })
     .join(", ");
 }

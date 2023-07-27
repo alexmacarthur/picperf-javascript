@@ -2,17 +2,20 @@ import { import_ } from "@brillout/import";
 import { transform, transformSrcset } from "../../shared/transform";
 
 interface Options {
-  shouldTransform: (url: string) => boolean;
+  shouldTransform?: (url: string) => boolean;
+  host?: string;
 }
 
 const defaultOptions: Options = {
-  shouldTransform: (url) => url.startsWith("http"),
+  shouldTransform: () => true,
+  host: undefined,
 };
 
 export function rehypePicPerf(
   options: Options = defaultOptions,
 ): (ast: any) => void {
   const mergedOptions = { ...defaultOptions, ...options };
+  const { host, shouldTransform } = mergedOptions;
 
   const propertiesToTransform = ["src", "srcSet", "dataSrc", "dataSrcset"];
 
@@ -33,7 +36,7 @@ export function rehypePicPerf(
         return;
       }
 
-      if (!mergedOptions.shouldTransform(src || dataSrc)) {
+      if (!shouldTransform(src || dataSrc)) {
         return;
       }
 
@@ -43,11 +46,11 @@ export function rehypePicPerf(
         }
 
         if (property === "srcSet") {
-          node.properties.srcSet = transformSrcset(srcSet);
+          node.properties.srcSet = transformSrcset(srcSet, host);
           return;
         }
 
-        node.properties[property] = transform(node.properties[property]);
+        node.properties[property] = transform(node.properties[property], host);
       });
     });
   };

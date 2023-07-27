@@ -4,17 +4,17 @@ Use this plugin to transform the URLs in your Markdown images into PicPerf URLs,
 
 ## Install the Package
 
-Run `npm install @picperf/rehype`. 
+Run `npm install @picperf/rehype`.
 
 ## Usage
 
-Wire it up by importing the plugin and configuring it with your Markdown setup. Here's an example from Astro: 
+Wire it up by importing the plugin and configuring it with your Markdown setup. Here's an example from Astro:
 
 ```js
-import { rehypePicPerf } from '@picperf/rehype';
+import { rehypePicPerf } from "@picperf/rehype";
 
 export default defineConfig({
-  markdown:{
+  markdown: {
     rehypePlugins: [rehypePicPerf],
   },
 
@@ -24,7 +24,7 @@ export default defineConfig({
 
 ## Overriding Transformations
 
-By default, absolute URLs will be prefixed with "https://picperf.dev". If you'd like to override this behavior for particular URLs, you can use the `shouldTransform()` option: 
+By default, absolute URLs will be prefixed with "https://picperf.dev". If you'd like to override this behavior for particular URLs, you can use the `shouldTransform()` option:
 
 ```js
 markdown:{
@@ -37,3 +37,25 @@ markdown:{
     }]],
 },
 ```
+
+## Setting a Host
+
+Out of the box, this plugin will _not_ transform image root-relative URLs, like this:
+
+```markdown
+![my image](/my-image.jpg)
+```
+
+In order to transform these, pass a `host` option. That value will be used when transforming the URL:
+
+```js
+markdown:{
+    rehypePlugins: [[ rehypePicPerf, {
+        host: "https://macarthur.me"
+    }]],
+},
+```
+
+## Questions?
+
+Get in touch by finding me on [Twitter/X](https://twitter.com/amacarthur) or [my website](https://macarthur.me/contact).
