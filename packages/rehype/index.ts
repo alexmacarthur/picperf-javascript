@@ -1,3 +1,4 @@
+import { import_ } from "@brillout/import";
 import { transform, transformSrcset } from "../../shared/transform";
 
 interface Options {
@@ -16,7 +17,7 @@ export function rehypePicPerf(
   const propertiesToTransform = ["src", "srcSet", "dataSrc", "dataSrcset"];
 
   return async (ast) => {
-    const { visit } = await import('unist-util-visit');
+    const { visit } = await import_("unist-util-visit");
 
     visit(ast, "element", (node) => {
       const tag = (node.tagName || "").toLowerCase();

@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@brillout/import": "^0.2.3",
     "hast-util-to-html": "^8.0.4",
     "rehype-parse": "^8.0.4",
     "rehype-stringify": "^9.0.3",
