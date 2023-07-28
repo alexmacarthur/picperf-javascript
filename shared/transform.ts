@@ -5,6 +5,11 @@ const PREFIX = "https://picperf.dev";
 export function transform(path: string, host?: string) {
   const url = host ? buildImageUrl(host, path) : path;
 
+  // We weren't able to build a valid URL.
+  if (!url) {
+    return path;
+  }
+
   if (!url.startsWith("http")) {
     return url;
   }

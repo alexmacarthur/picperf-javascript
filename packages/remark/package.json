@@ -1,11 +1,11 @@
 {
-  "name": "@picperf/rehype",
-  "version": "0.1.0",
-  "description": "",
+  "name": "@picperf/remark",
+  "version": "0.0.1",
+  "description": "A Remark plugin for optimizing your images with PicPerf.dev.",
   "license": "ISC",
-  "main": "dist/cjs/packages/rehype/index.js",
-  "module": "dist/esm/packages/rehype/index.js",
-  "types": "dist/types/packages/rehype/index.d.ts",
+  "main": "dist/cjs/packages/remark/index.js",
+  "module": "dist/esm/packages/remark/index.js",
+  "types": "dist/types/packages/remark/index.d.ts",
   "scripts": {
     "test": "vitest run",
     "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
@@ -19,12 +19,12 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "rehype-parse": "^8.0.4",
-    "rehype-stringify": "^9.0.3",
+    "remark-html": "^15.0.2",
+    "remark-parse": "^10.0.2",
+    "remark-stringify": "^10.0.3",
     "unified": "^10.1.2"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "gitHead": "ba29d14e7e1f536472bd4b6164ab8a11467c247a"
+  }
 }
