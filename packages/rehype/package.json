@@ -1,6 +1,6 @@
 {
   "name": "@picperf/rehype",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A Remark plugin for optimizing images with PicPerf.dev.",
   "license": "ISC",
   "homepage": "https://picperf.dev",
@@ -13,7 +13,13 @@
     "build:esm": "tsc --module es2020 --outDir dist/esm",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
-  "keywords": ["image optimization", "picperf", "remark", "rehype", "unified"],
+  "keywords": [
+    "image optimization",
+    "picperf",
+    "remark",
+    "rehype",
+    "unified"
+  ],
   "author": "Alex MacArthur (https://macarthur.me)",
   "dependencies": {
     "@brillout/import": "^0.2.3",
