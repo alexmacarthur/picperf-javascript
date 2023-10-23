@@ -31,6 +31,34 @@ describe("absolute paths", () => {
     );
   });
 
+  it("should prefix URL that lives on PP.dev itself", async () => {
+    const ast = await parse(
+      `<img src="https://picperf.dev/some-image.com/image.png" alt="">`,
+    );
+
+    await rehypePicPerf()(ast);
+
+    const result = await stringify(ast);
+
+    expect(result).toContain(
+      `<img src="https://picperf.dev/https://picperf.dev/some-image.com/image.png" alt="">`,
+    );
+  });
+
+  it("should not prefix URL that has transformation params", async () => {
+    const ast = await parse(
+      `<img src="https://picperf.dev/~width=320~/https://picperf.dev/some-image.com/image.png" alt="">`,
+    );
+
+    await rehypePicPerf()(ast);
+
+    const result = await stringify(ast);
+
+    expect(result).toContain(
+      `<img src="https://picperf.dev/~width=320~/https://picperf.dev/some-image.com/image.png" alt="">`,
+    );
+  });
+
   it("is opted out of prefixing URL", async () => {
     const ast = await parse(
       `<img src="https://some-image.com/image.png" alt="">`,

@@ -1,6 +1,8 @@
 import { buildImageUrl } from "./buildImageUrl";
 
 const PREFIX = "https://picperf.dev";
+const PREFIX_PATTERN =
+  /https:\/\/(?:www.)?picperf\.dev\/(?:(?:~(.*?)~)|https?:\/\/)/;
 
 export function transform(path: string, host?: string) {
   const url = host ? buildImageUrl(host, path) : path;
@@ -14,7 +16,7 @@ export function transform(path: string, host?: string) {
     return url;
   }
 
-  if (url.startsWith(PREFIX)) {
+  if (PREFIX_PATTERN.test(url)) {
     return url;
   }
 
