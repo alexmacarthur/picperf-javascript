@@ -1,6 +1,6 @@
 {
   "name": "@picperf/rehype",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A Remark plugin for optimizing images with PicPerf.dev.",
   "license": "ISC",
   "homepage": "https://picperf.dev",
@@ -23,12 +23,14 @@
   "author": "Alex MacArthur (https://macarthur.me)",
   "dependencies": {
     "@brillout/import": "^0.2.3",
+    "@picperf/utils": "^0.2.0",
+    "rehype-parse": "^9.0.0",
+    "rehype-stringify": "^10.0.0",
+    "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "rehype-parse": "^9.0.0",
-    "rehype-stringify": "^10.0.0",
-    "unified": "^11.0.3"
+    "vitest": "^0.34.6"
   },
   "publishConfig": {
     "access": "public"

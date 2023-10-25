@@ -5,9 +5,9 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "lerna run test", 
-    "format": "prettier --write \"**/*.{ts,md}\"", 
-    "build": "lerna run build", 
+    "test": "lerna run test",
+    "format": "prettier --write \"**/*.{ts,md}\"",
+    "build": "lerna run build",
     "publish": "lerna publish"
   },
   "repository": {
@@ -25,6 +25,6 @@
     "prettier": "^3.0.0"
   },
   "dependencies": {
-    "vitest": "^0.33.0"
+    "D": "^1.0.0"
   }
 }

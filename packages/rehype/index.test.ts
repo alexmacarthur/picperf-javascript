@@ -13,13 +13,13 @@ describe("absolute paths", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img src="https://picperf.dev/https://some-image.com/image.png" alt="">`,
+      `<img src="https://picperf.io/https://some-image.com/image.png" alt="">`,
     );
   });
 
   it("should not prefix URL that's already been prefixed", async () => {
     const ast = await parse(
-      `<img src="https://picperf.dev/https://some-image.com/image.png" alt="">`,
+      `<img src="https://picperf.io/https://some-image.com/image.png" alt="">`,
     );
 
     await rehypePicPerf()(ast);
@@ -27,13 +27,13 @@ describe("absolute paths", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img src="https://picperf.dev/https://some-image.com/image.png" alt="">`,
+      `<img src="https://picperf.io/https://some-image.com/image.png" alt="">`,
     );
   });
 
   it("should prefix URL that lives on PP.dev itself", async () => {
     const ast = await parse(
-      `<img src="https://picperf.dev/some-image.com/image.png" alt="">`,
+      `<img src="https://picperf.io/some-image.com/image.png" alt="">`,
     );
 
     await rehypePicPerf()(ast);
@@ -41,13 +41,13 @@ describe("absolute paths", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img src="https://picperf.dev/https://picperf.dev/some-image.com/image.png" alt="">`,
+      `<img src="https://picperf.io/https://picperf.io/some-image.com/image.png" alt="">`,
     );
   });
 
   it("should not prefix URL that has transformation params", async () => {
     const ast = await parse(
-      `<img src="https://picperf.dev/~width=320~/https://picperf.dev/some-image.com/image.png" alt="">`,
+      `<img src="https://picperf.io/~width=320~/https://picperf.io/some-image.com/image.png" alt="">`,
     );
 
     await rehypePicPerf()(ast);
@@ -55,7 +55,7 @@ describe("absolute paths", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img src="https://picperf.dev/~width=320~/https://picperf.dev/some-image.com/image.png" alt="">`,
+      `<img src="https://picperf.io/~width=320~/https://picperf.io/some-image.com/image.png" alt="">`,
     );
   });
 
@@ -95,7 +95,7 @@ describe("non-HTTP paths", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img src="https://picperf.dev/https://some-image.com/image.png" alt="my alt">`,
+      `<img src="https://picperf.io/https://some-image.com/image.png" alt="my alt">`,
     );
   });
 
@@ -121,7 +121,7 @@ describe("data-src", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img data-src="https://picperf.dev/https://some-image.com/image.png" alt="">`,
+      `<img data-src="https://picperf.io/https://some-image.com/image.png" alt="">`,
     );
   });
 });
@@ -151,7 +151,7 @@ describe("srcset", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img srcset="https://picperf.dev/https://some-image.com/elf-400w.jpg 480w, https://picperf.dev/https://some-image.com/elf-800w.jpg 800w" sizes="(max-width: 600px) 480px, 800px" src="https://picperf.dev/https://some-image.com/elf.jpg">`,
+      `<img srcset="https://picperf.io/https://some-image.com/elf-400w.jpg 480w, https://picperf.io/https://some-image.com/elf-800w.jpg 800w" sizes="(max-width: 600px) 480px, 800px" src="https://picperf.io/https://some-image.com/elf.jpg">`,
     );
   });
 });

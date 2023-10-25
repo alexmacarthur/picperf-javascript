@@ -1,5 +1,5 @@
 import { import_ } from "@brillout/import";
-import { transform, transformSrcset } from "../../shared/transform";
+import { transform, transformSrcset } from "@picperf/utils";
 
 interface Options {
   shouldTransform?: (url: string) => boolean;

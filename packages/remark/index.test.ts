@@ -11,13 +11,13 @@ describe("absolute paths", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img src="https://picperf.dev/https://some-image.com/image.png" alt="">`,
+      `<img src="https://picperf.io/https://some-image.com/image.png" alt="">`,
     );
   });
 
   it("should not prefix URL that's already been prefixed", async () => {
     const ast = await parse(
-      "![](https://picperf.dev/https://some-image.com/image.png)",
+      "![](https://picperf.io/https://some-image.com/image.png)",
     );
 
     await remarkPicPerf()(ast);
@@ -25,7 +25,7 @@ describe("absolute paths", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img src="https://picperf.dev/https://some-image.com/image.png" alt="">`,
+      `<img src="https://picperf.io/https://some-image.com/image.png" alt="">`,
     );
   });
 
@@ -65,7 +65,7 @@ describe("non-HTTP paths", () => {
     const result = await stringify(ast);
 
     expect(result).toContain(
-      `<img src="https://picperf.dev/https://some-image.com/image.png" alt="my alt">`,
+      `<img src="https://picperf.io/https://some-image.com/image.png" alt="my alt">`,
     );
   });
 

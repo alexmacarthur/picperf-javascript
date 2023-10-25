@@ -1,6 +1,6 @@
 {
   "name": "@picperf/remark",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A Remark plugin for optimizing images with PicPerf.dev.",
   "license": "ISC",
   "author": "Alex MacArthur (https://macarthur.me)",
@@ -23,15 +23,17 @@
   },
   "dependencies": {
     "@brillout/import": "^0.2.3",
+    "@picperf/utils": "^0.2.0",
+    "remark-html": "^16.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0"
-  },
-  "devDependencies": {
-    "remark-html": "^15.0.2",
-    "remark-parse": "^10.0.2",
-    "remark-stringify": "^10.0.3",
-    "unified": "^10.1.2"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6"
   }
 }

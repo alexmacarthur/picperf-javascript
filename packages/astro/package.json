@@ -1,0 +1,31 @@
+{
+  "name": "@picperf/astro",
+  "version": "0.1.0-beta.2",
+  "description": "An Astro component for optimizing images with PicPerf.dev.",
+  "license": "ISC",
+  "author": "Alex MacArthur (https://macarthur.me)",
+  "homepage": "https://picperf.io",
+  "main": "src/index.astro",
+  "types": "./index.d.ts",
+  "files": [
+    "src",
+    "index.d.ts"
+  ],
+  "keywords": [
+    "astro",
+    "astro-component",
+    "image optimization",
+    "picperf"
+  ],
+  "scripts": {
+    "build": "echo 'No build step here...'",
+    "test": "echo 'No tests here...'"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@picperf/utils": "^0.2.0",
+    "astro": "^3.3.4"
+  }
+}
