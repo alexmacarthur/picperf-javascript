@@ -1,12 +1,12 @@
 {
   "name": "@picperf/rehype",
-  "version": "0.4.0",
-  "description": "A Remark plugin for optimizing images with PicPerf.dev.",
+  "version": "0.4.1",
+  "description": "A Remark plugin for optimizing images with PicPerf.io.",
   "license": "ISC",
-  "homepage": "https://picperf.dev",
-  "main": "dist/cjs/packages/rehype/index.js",
-  "module": "dist/esm/packages/rehype/index.js",
-  "types": "dist/types/packages/rehype/index.d.ts",
+  "homepage": "https://picperf.io",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "test": "vitest run",
     "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
