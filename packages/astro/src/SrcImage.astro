@@ -1,0 +1,17 @@
+---
+import type { SrcImageProps } from "..";
+import { buildSrc } from "./utils";
+
+type Props = SrcImageProps;
+
+const { src, srcset, ...rest } = Astro.props;
+
+const { src: builtSrc, srcset: builtSrcset } = buildSrc({
+  src,
+  srcset,
+  origin: Astro.url.origin,
+  environment: import.meta.env.MODE,
+});
+---
+
+<img src={builtSrc} srcset={builtSrcset} {...rest as any} />

@@ -1,31 +1,41 @@
 {
   "name": "@picperf/astro",
-  "version": "0.1.0-beta.2",
-  "description": "An Astro component for optimizing images with PicPerf.dev.",
+  "version": "1.0.0",
+  "description": "An Astro component for optimizing images with PicPerf.io.",
   "license": "ISC",
   "author": "Alex MacArthur (https://macarthur.me)",
   "homepage": "https://picperf.io",
   "main": "src/index.astro",
   "types": "./index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexmacarthur/picperf-javascript"
+  },
   "files": [
     "src",
     "index.d.ts"
   ],
   "keywords": [
     "astro",
+    "withastro",
     "astro-component",
     "image optimization",
     "picperf"
   ],
   "scripts": {
     "build": "echo 'No build step here...'",
-    "test": "echo 'No tests here...'"
+    "test": "echo 'No tests here...'",
+    "check": "astro check"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@picperf/utils": "^0.2.0",
-    "astro": "^3.3.4"
+    "@picperf/utils": "^0.2.1",
+    "astro": "^3.3.4",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.3.0"
   }
 }

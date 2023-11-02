@@ -1,13 +1,13 @@
 {
   "name": "@picperf/utils",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Utilities for optimizing images with PicPerf.dev.",
   "license": "ISC",
   "author": "Alex MacArthur (https://macarthur.me)",
   "homepage": "https://picperf.dev",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "types": ".dist/types/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "files": [
     "src",
     "dist"

@@ -1,16 +1,17 @@
 ---
-import { transform, transformSrcset, buildImageUrl } from "@picperf/utils";
 import type { PicPerfImageProps } from "..";
+import SrcImage from "./SrcImage.astro";
+import SrcObjImage from "./SrcObjImage.astro";
 
 type Props = PicPerfImageProps;
 
 const { src, srcset, ...rest } = Astro.props;
-
-const isProduction = import.meta.env.MODE === "production";
-const builtUrl = buildImageUrl(Astro.url.origin, src);
-const imageSrc = isProduction ? transform(builtUrl) : src;
-const imageSrcset =
-  isProduction && srcset ? transformSrcset(srcset, Astro.url.origin) : srcset;
 ---
 
-<img src={imageSrc} srcset={imageSrcset} {...rest as any} />
+{
+  typeof src === "object" ? (
+    <SrcObjImage srcObj={src} {...(rest as any)} />
+  ) : (
+    <SrcImage src={src as string} srcset={srcset} {...(rest as any)} />
+  )
+}
