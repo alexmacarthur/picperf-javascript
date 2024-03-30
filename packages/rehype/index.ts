@@ -46,11 +46,14 @@ export function rehypePicPerf(
         }
 
         if (property === "srcSet") {
-          node.properties.srcSet = transformSrcset(srcSet, host);
+          node.properties.srcSet = transformSrcset({ value: srcSet, host });
           return;
         }
 
-        node.properties[property] = transform(node.properties[property], host);
+        node.properties[property] = transform({
+          path: node.properties[property],
+          host,
+        });
       });
     });
   };
