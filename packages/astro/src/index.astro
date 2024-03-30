@@ -5,13 +5,22 @@ import SrcObjImage from "./SrcObjImage.astro";
 
 type Props = PicPerfImageProps;
 
-const { src, srcset, ...rest } = Astro.props;
+const { src, srcset, includeInSitemap = false, ...rest } = Astro.props;
 ---
 
 {
   typeof src === "object" ? (
-    <SrcObjImage srcObj={src} {...(rest as any)} />
+    <SrcObjImage
+      srcObj={src}
+      includeInSitemap={includeInSitemap}
+      {...(rest as any)}
+    />
   ) : (
-    <SrcImage src={src as string} srcset={srcset} {...(rest as any)} />
+    <SrcImage
+      src={src as string}
+      srcset={srcset}
+      includeInSitemap={includeInSitemap}
+      {...(rest as any)}
+    />
   )
 }

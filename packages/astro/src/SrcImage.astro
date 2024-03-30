@@ -4,12 +4,14 @@ import { buildSrc } from "./utils";
 
 type Props = SrcImageProps;
 
-const { src, srcset, ...rest } = Astro.props;
+const { src, srcset, includeInSitemap, ...rest } = Astro.props;
 
 const { src: builtSrc, srcset: builtSrcset } = buildSrc({
   src,
   srcset,
+  includeInSitemap,
   origin: Astro.url.origin,
+  pagePath: Astro.url.pathname,
   environment: import.meta.env.MODE,
 });
 ---
