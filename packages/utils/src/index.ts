@@ -1,5 +1,5 @@
 import { transform, transformSrcset } from "./transform";
-import { buildImageUrl } from "./buildImageUrl";
+import { buildImageUrlWithHost } from "./buildImageUrlWithHost";
 import { setSitemapPath } from "./setSitemapPath";
 
-export { transform, transformSrcset, buildImageUrl, setSitemapPath };
+export { transform, transformSrcset, buildImageUrlWithHost, setSitemapPath };

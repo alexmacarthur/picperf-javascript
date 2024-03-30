@@ -59,6 +59,26 @@ describe("transform()", () => {
       "https://picperf.io/https://yourhost.com/image.jpg?sitemap_path=/some/path",
     );
   });
+
+  describe("no host", () => {
+    it("appends sitemap_path to a path", () => {
+      const path = "/image.jpg";
+      const sitemapPath = "/some/path";
+      const transformedPath = transform({ path, sitemapPath });
+
+      expect(transformedPath).toBe("/image.jpg?sitemap_path=/some/path");
+    });
+
+    it("appends sitemap_path to a path with query params", () => {
+      const path = "https://example.com/image.jpg?hello=world";
+      const sitemapPath = "/some/path";
+      const transformedPath = transform({ path, sitemapPath });
+
+      expect(transformedPath).toBe(
+        "https://picperf.io/https://example.com/image.jpg?hello=world&sitemap_path=/some/path",
+      );
+    });
+  });
 });
 
 describe("transformSrcset()", () => {

@@ -36,7 +36,7 @@ function buildRawUrl(imageUrl: string, imagePath: string): string | null {
   return [urlObj.origin, newPath, rawImgPath].filter((p) => !!p).join("/");
 }
 
-export function buildImageUrl({
+export function buildImageUrlWithHost({
   imageUrl,
   imagePath,
   sitemapPath,
