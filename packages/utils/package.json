@@ -1,6 +1,6 @@
 {
   "name": "@picperf/utils",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Utilities for optimizing images with PicPerf.dev.",
   "license": "ISC",
   "author": "Alex MacArthur (https://macarthur.me)",

@@ -1,24 +1,26 @@
-export function buildImageUrl(url: string, path: string) {
-  const urlObj = new URL(url);
+import { setSitemapPath } from "./setSitemapPath";
 
-  if (path.startsWith("data:")) {
+function buildRawUrl(imageUrl: string, imagePath: string): string | null {
+  const urlObj = new URL(imageUrl);
+
+  if (imagePath.startsWith("data:")) {
     return null;
   }
 
-  if (path.startsWith("//")) {
-    return `https:${path}`;
+  if (imagePath.startsWith("//")) {
+    return `https:${imagePath}`;
   }
 
-  if (path.startsWith("/")) {
-    return `${urlObj.origin}${path}`;
+  if (imagePath.startsWith("/")) {
+    return `${urlObj.origin}${imagePath}`;
   }
 
-  if (path.startsWith("http")) {
-    return path;
+  if (imagePath.startsWith("http")) {
+    return imagePath;
   }
 
-  const levels = path.match(/\.\.\//g)?.length || 0;
-  const rawImgPath = path.replace(/\.\.?\//g, ""); // dot slashes
+  const levels = imagePath.match(/\.\.\//g)?.length || 0;
+  const rawImgPath = imagePath.replace(/\.\.?\//g, ""); // dot slashes
 
   const parsedPath = urlObj.pathname
     .split("/")
@@ -32,4 +34,22 @@ export function buildImageUrl(url: string, path: string) {
   const newPath = [...cloned.reverse()].join("/");
 
   return [urlObj.origin, newPath, rawImgPath].filter((p) => !!p).join("/");
+}
+
+export function buildImageUrl({
+  imageUrl,
+  imagePath,
+  sitemapPath,
+}: {
+  imageUrl: string;
+  imagePath: string;
+  sitemapPath?: string;
+}) {
+  const rawUrl = buildRawUrl(imageUrl, imagePath);
+
+  if (sitemapPath && rawUrl) {
+    return setSitemapPath(rawUrl, sitemapPath);
+  }
+
+  return rawUrl;
 }
