@@ -1,6 +1,6 @@
 {
   "name": "@picperf/astro",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An Astro component for optimizing, reformatting, and caching images with PicPerf.io.",
   "license": "ISC",
   "author": "Alex MacArthur (https://macarthur.me)",
@@ -32,7 +32,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@picperf/utils": "^2.0.0",
+    "@picperf/utils": "^2.0.1",
     "astro": "^4.5.12",
     "typescript": "^5.4.3"
   },

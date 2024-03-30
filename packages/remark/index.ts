@@ -12,7 +12,7 @@ const defaultOptions: Options = {
 };
 
 export function remarkPicPerf(
-  options: Options = defaultOptions,
+  options: Options = defaultOptions
 ): (ast: any) => void {
   const mergedOptions = { ...defaultOptions, ...options };
   const { host, shouldTransform } = mergedOptions;
@@ -31,7 +31,7 @@ export function remarkPicPerf(
         return;
       }
 
-      node.url = transform(src, host);
+      node.url = transform({ path: src, host });
     });
   };
 }
