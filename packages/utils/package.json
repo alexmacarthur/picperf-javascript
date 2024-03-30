@@ -1,6 +1,6 @@
 {
   "name": "@picperf/utils",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Utilities for optimizing images with PicPerf.dev.",
   "license": "ISC",
   "author": "Alex MacArthur (https://macarthur.me)",
@@ -14,13 +14,16 @@
   ],
   "keywords": [],
   "scripts": {
+    "format": "prettier --write .",
     "test": "vitest run src",
     "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
     "build:esm": "tsc --module es2020 --outDir dist/esm",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
   "devDependencies": {
-    "vitest": "^0.34.6"
+    "@types/node": "^20.11.30",
+    "prettier": "^3.2.5",
+    "vitest": "^1.4.0"
   },
   "publishConfig": {
     "access": "public"
