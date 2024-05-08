@@ -2,7 +2,7 @@ import { ImageMetadata } from "astro";
 
 export type OverriddenImageElement = Omit<Partial<HTMLImageElement>, "src"> & {
   src: string | ImageMetadata;
-  fetchpriority: "auto" | "high" | "low";
+  fetchpriority?: "auto" | "high" | "low";
 };
 
 export type PicPerfImageProps = OverriddenImageElement & {
@@ -19,5 +19,5 @@ export type SrcObjImageProps = OverriddenImageElement & {
 export type SrcImageProps = PicPerfImageProps & { src: string };
 
 export default function PicPerfImage(
-  props: PicPerfImageProps
+  props: PicPerfImageProps,
 ): HTMLImageElement;
