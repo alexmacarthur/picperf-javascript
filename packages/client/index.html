@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200italic,400,600,600italic,700" />
+  </head>
+  <body>
+    <div style="max-width: 800px">
+      <img
+        style="max-width: 100%"
+        src="https://images.pexels.com/photos/26570991/pexels-photo-26570991/free-photo-of-xmas-cards-in-niche.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        alt="MacArthur.me" />
+    </div>
+
+    <script>
+      const isOnDesktop = screen.availWidth > 1400;
+
+      const images = document.querySelectorAll("img");
+
+      const isOnDesktopDevice = window.matchMedia(
+        "(min-width: 1024px)"
+      ).matches;
+
+      const promises = Array.from(images).map((image) => {
+        if (!isOnDesktop) {
+          console.log("Is not on a desktop. Not bothering.");
+          return null;
+        }
+
+        return new Promise((resolve) => {
+          function getRenderedWidth(img) {
+            return image.getBoundingClientRect().width;
+          }
+
+          if (!image.complete) {
+            image.addEventListener("load", () => {
+              const renderedWidth = getRenderedWidth(image);
+
+              resolve({ renderedWidth, naturalWidth: image.naturalWidth });
+            });
+          } else {
+            resolve({
+              renderedWidth: getRenderedWidth(image),
+              naturalWidth: image.naturalWidth,
+            });
+          }
+        });
+      });
+
+      Promise.all(promises).then((results) => {
+        console.log(results);
+
+        results.forEach(({ renderedWidth, naturalWidth }, index) => {
+          if (renderedWidth < naturalWidth) {
+            console.log(
+              "Trigger a resized version of this image that replaces the current one in the R2 bucket."
+            );
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
