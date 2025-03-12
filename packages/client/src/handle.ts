@@ -36,7 +36,7 @@ export function handle(fetchImmplementation: typeof fetch = fetch) {
       }
     });
 
-    const resolvedRequests = await Promise.all(requests);
+    await Promise.all(requests);
 
     return results;
   });

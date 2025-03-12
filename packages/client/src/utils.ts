@@ -23,9 +23,3 @@ export function getWidth(image: HTMLImageElement): Promise<ImageWidth> {
     });
   });
 }
-
-// export function polyfillScheduler() {
-//   globalThis.scheduler = globalThis.scheduler || {};
-//   globalThis.scheduler.yield =
-//     globalThis.scheduler.yield || (() => new Promise((r) => setTimeout(r, 0)));
-// }
