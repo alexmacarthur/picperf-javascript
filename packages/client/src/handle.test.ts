@@ -72,7 +72,7 @@ describe("on a desktop", () => {
 
     loop(3, function (time) {
       expect(mockFetch).toHaveBeenCalledWith(
-        "http://go.picperf.io/api/optimize/transform/auto",
+        "https://go.picperf.io/api/optimize/transform/auto",
         expect.objectContaining({
           keepalive: true,
           priority: "low",

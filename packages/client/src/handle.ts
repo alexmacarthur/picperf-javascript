@@ -2,7 +2,7 @@ import { ImageWidth, TransformationRequest } from "./types";
 import { getWidth } from "./utils";
 
 export const AUTO_TRANSFORM_ENDPOINT =
-  "http://go.picperf.io/api/optimize/transform/auto";
+  "https://go.picperf.io/api/optimize/transform/auto";
 
 export function handle(fetchImmplementation: typeof fetch = fetch) {
   const isOnDesktop = screen.availWidth > 1400;
