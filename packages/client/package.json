@@ -1,6 +1,6 @@
 {
   "name": "@picperf/client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Client-side script for PicPerf.",
   "type": "module",
   "main": "dist/index.umd.js",

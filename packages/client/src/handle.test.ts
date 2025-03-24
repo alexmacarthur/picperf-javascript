@@ -77,6 +77,10 @@ describe("on a desktop", () => {
           keepalive: true,
           priority: "low",
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
           body: `{"url":"https://img${time}.jpeg","transformations":{"width":500}}`,
         }),
       );
