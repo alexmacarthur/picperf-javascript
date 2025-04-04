@@ -4,6 +4,10 @@ import path from "path";
 export default defineConfig({
   test: {
     environment: "jsdom",
+    setupFiles: "./src/setupTests.ts",
+  },
+  esbuild: {
+    drop: ["console", "debugger"],
   },
   build: {
     minify: "terser",

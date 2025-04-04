@@ -1,6 +1,14 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
 import * as utils from "./utils";
-import { AUTO_TRANSFORM_ENDPOINT, handle } from "./handle";
+import { handle } from "./handle";
 
 function mockScreenWidth(width: number) {
   // @ts-ignore
@@ -26,9 +34,9 @@ describe("on a mobile device", () => {
 
   it("images are not transformed", async () => {
     document.body.innerHTML = `
-      <img src="https://img1.jpeg" />
-      <img src="https://img2.jpeg" />
-      <img src="https://img3.jpeg" />
+      <img src="https://picperf.io/https://img1.jpeg" />
+      <img src="https://picperf.io/https://img2.jpeg" />
+      <img src="https://picperf.io/https://img3.jpeg" />
     `;
 
     const mockFetch = vi.fn();
@@ -49,9 +57,9 @@ describe("on a desktop", () => {
 
   it("images need to be transformed", async () => {
     document.body.innerHTML = `
-      <img src="https://img1.jpeg" />
-      <img src="https://img2.jpeg" />
-      <img src="https://img3.jpeg" />
+      <img src="https://picperf.io/https://img1.jpeg" />
+      <img src="https://picperf.io/https://img2.jpeg" />
+      <img src="https://picperf.io/https://img3.jpeg" />
     `;
 
     const mockFetch = vi.fn();
