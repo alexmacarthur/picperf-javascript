@@ -1,121 +1,60 @@
-import {
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-} from "vitest";
-import * as utils from "./utils";
+import { expect, it, vi } from "vitest";
 import { handle } from "./handle";
 
-function mockScreenWidth(width: number) {
-  // @ts-ignore
-  globalThis.screen = {
-    availWidth: width,
-  };
-}
+it("makes fresh request", () => {
+  const mockFetch = vi.fn();
 
-afterEach(() => {
-  mockScreenWidth(0);
+  handle(mockFetch);
+
+  expect(mockFetch).toHaveBeenCalledWith(
+    "https://go.picperf.io/api/optimize/transform/auto",
+    {
+      keepalive: true,
+      priority: "low",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        url: window.location.origin + window.location.pathname,
+      }),
+    }
+  );
 });
 
-function loop(times: number, cb) {
-  for (let i = 0; i < times; i++) {
-    cb(i + 1);
-  }
-}
+it("makes request when set time is recent", () => {
+  const mockFetch = vi.fn();
 
-describe("on a mobile device", () => {
-  beforeEach(() => {
-    mockScreenWidth(1200);
-  });
+  const recentTime = Date.now() - 1000 * 60 * 60 * 21;
+  localStorage.setItem("picperf:crawl:time", recentTime.toString());
 
-  it("images are not transformed", async () => {
-    document.body.innerHTML = `
-      <img src="https://picperf.io/https://img1.jpeg" />
-      <img src="https://picperf.io/https://img2.jpeg" />
-      <img src="https://picperf.io/https://img3.jpeg" />
-    `;
+  handle(mockFetch);
 
-    const mockFetch = vi.fn();
-
-    let getWidthSpy = vi.spyOn(utils, "getWidth");
-
-    await handle(mockFetch);
-
-    expect(mockFetch).not.toHaveBeenCalled();
-    expect(getWidthSpy).not.toHaveBeenCalled();
-  });
+  expect(mockFetch).not.toHaveBeenCalled();
 });
 
-describe("on a desktop", () => {
-  beforeEach(() => {
-    mockScreenWidth(1500);
-  });
+it("makes request when set time is expired", () => {
+  const mockFetch = vi.fn();
 
-  it("images need to be transformed", async () => {
-    document.body.innerHTML = `
-      <img src="https://picperf.io/https://img1.jpeg" />
-      <img src="https://picperf.io/https://img2.jpeg" />
-      <img src="https://picperf.io/https://img3.jpeg" />
-    `;
+  const recentTime = Date.now() - 1000 * 60 * 60 * 25;
+  localStorage.setItem("picperf:crawl:time", recentTime.toString());
 
-    const mockFetch = vi.fn();
+  handle(mockFetch);
 
-    let getWidthSpy = vi.spyOn(utils, "getWidth");
-
-    loop(3, function (iteration) {
-      getWidthSpy = getWidthSpy.mockResolvedValueOnce({
-        url: `https://img${iteration}.jpeg`,
-        renderedWidth: 500,
-        naturalWidth: 1000,
-      });
-    });
-
-    await handle(mockFetch);
-
-    expect(mockFetch).toHaveBeenCalledTimes(3);
-
-    loop(3, function (time) {
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://go.picperf.io/api/optimize/transform/auto",
-        expect.objectContaining({
-          keepalive: true,
-          priority: "low",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: `{"url":"https://img${time}.jpeg","transformations":{"width":500}}`,
-        }),
-      );
-    });
-  });
-
-  it("images do not need to be transformed", async () => {
-    document.body.innerHTML = `
-      <img src="https://img1.jpeg" />
-      <img src="https://img2.jpeg" />
-      <img src="https://img3.jpeg" />
-    `;
-
-    const mockFetch = vi.fn();
-
-    let getWidthSpy = vi.spyOn(utils, "getWidth");
-
-    loop(3, function (iteration) {
-      getWidthSpy = getWidthSpy.mockResolvedValueOnce({
-        url: `https://img${iteration}.jpeg`,
-        renderedWidth: 1000,
-        naturalWidth: 1000,
-      });
-    });
-
-    await handle(mockFetch);
-
-    expect(mockFetch).not.toHaveBeenCalled();
-  });
+  expect(mockFetch).toHaveBeenCalledWith(
+    "https://go.picperf.io/api/optimize/transform/auto",
+    {
+      keepalive: true,
+      priority: "low",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        url: window.location.origin + window.location.pathname,
+      }),
+    }
+  );
 });
