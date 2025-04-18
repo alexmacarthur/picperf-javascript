@@ -19,7 +19,7 @@ it("makes fresh request", () => {
       body: JSON.stringify({
         url: window.location.origin + window.location.pathname,
       }),
-    }
+    },
   );
 });
 
@@ -27,7 +27,12 @@ it("makes request when set time is recent", () => {
   const mockFetch = vi.fn();
 
   const recentTime = Date.now() - 1000 * 60 * 60 * 21;
-  localStorage.setItem("picperf:crawl:time", recentTime.toString());
+  localStorage.setItem(
+    "picperf:crawl:time",
+    JSON.stringify({
+      [window.location.href]: recentTime.toString(),
+    }),
+  );
 
   handle(mockFetch);
 
@@ -38,7 +43,12 @@ it("makes request when set time is expired", () => {
   const mockFetch = vi.fn();
 
   const recentTime = Date.now() - 1000 * 60 * 60 * 25;
-  localStorage.setItem("picperf:crawl:time", recentTime.toString());
+  localStorage.setItem(
+    "picperf:crawl:time",
+    JSON.stringify({
+      [window.location.href]: recentTime.toString(),
+    }),
+  );
 
   handle(mockFetch);
 
@@ -55,6 +65,6 @@ it("makes request when set time is expired", () => {
       body: JSON.stringify({
         url: window.location.origin + window.location.pathname,
       }),
-    }
+    },
   );
 });
