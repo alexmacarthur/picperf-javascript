@@ -35,7 +35,7 @@ describe("transform()", () => {
     const transformedPath = transform({ path });
 
     expect(transformedPath).toBe(
-      "https://picperf.io/https://my-image.com/image.jpg",
+      "https://picperf.io/https://my-image.com/image.jpg"
     );
   });
 
@@ -45,7 +45,18 @@ describe("transform()", () => {
     const transformedPath = transform({ path, host });
 
     expect(transformedPath).toBe(
-      "https://picperf.io/https://yourhost.com/image.jpg",
+      "https://picperf.io/https://yourhost.com/image.jpg"
+    );
+  });
+
+  it("uses a provided root host (in the event of a custom domain)", () => {
+    const path = "/image.jpg";
+    const host = "https://yourhost.com";
+    const rootHost = "https://cdn.example.com";
+    const transformedPath = transform({ path, host, rootHost });
+
+    expect(transformedPath).toBe(
+      "https://cdn.example.com/https://yourhost.com/image.jpg"
     );
   });
 
@@ -56,7 +67,7 @@ describe("transform()", () => {
     const transformedPath = transform({ path, host, sitemapPath });
 
     expect(transformedPath).toBe(
-      "https://picperf.io/https://yourhost.com/image.jpg?sitemap_path=/some/path",
+      "https://picperf.io/https://yourhost.com/image.jpg?sitemap_path=/some/path"
     );
   });
 
@@ -75,7 +86,7 @@ describe("transform()", () => {
       const transformedPath = transform({ path, sitemapPath });
 
       expect(transformedPath).toBe(
-        "https://picperf.io/https://example.com/image.jpg?hello=world&sitemap_path=/some/path",
+        "https://picperf.io/https://example.com/image.jpg?hello=world&sitemap_path=/some/path"
       );
     });
   });
@@ -88,7 +99,7 @@ describe("transformSrcset()", () => {
     const transformedSrcset = transformSrcset({ value: srcset });
 
     expect(transformedSrcset).toBe(
-      "https://picperf.io/https://my-image.com/image.jpg 1x, https://picperf.io/https://my-image.com/image@2x 2x",
+      "https://picperf.io/https://my-image.com/image.jpg 1x, https://picperf.io/https://my-image.com/image@2x 2x"
     );
   });
 
@@ -103,7 +114,41 @@ describe("transformSrcset()", () => {
     });
 
     expect(transformedSrcset).toBe(
-      "https://picperf.io/https://my-image.com/image.jpg?sitemap_path=/some/path 1x, https://picperf.io/https://my-image.com/image@2x?sitemap_path=/some/path 2x",
+      "https://picperf.io/https://my-image.com/image.jpg?sitemap_path=/some/path 1x, https://picperf.io/https://my-image.com/image@2x?sitemap_path=/some/path 2x"
+    );
+  });
+
+  it("uses a provided root host (in the event of a custom domain)", () => {
+    const srcset =
+      "https://my-image.com/image.jpg 1x, https://my-image.com/image@2x 2x";
+    const sitemapPath = "/some/path";
+    const rootHost = "https://cdn.example.com";
+    const transformedSrcset = transformSrcset({
+      value: srcset,
+      host: "https://my-image.com",
+      sitemapPath,
+      rootHost,
+    });
+
+    expect(transformedSrcset).toBe(
+      "https://cdn.example.com/https://my-image.com/image.jpg?sitemap_path=/some/path 1x, https://cdn.example.com/https://my-image.com/image@2x?sitemap_path=/some/path 2x"
+    );
+  });
+
+  it("adds protocol to root host if missing", () => {
+    const srcset =
+      "https://my-image.com/image.jpg 1x, https://my-image.com/image@2x 2x";
+    const sitemapPath = "/some/path";
+    const rootHost = "cdn.example.com";
+    const transformedSrcset = transformSrcset({
+      value: srcset,
+      host: "https://my-image.com",
+      sitemapPath,
+      rootHost,
+    });
+
+    expect(transformedSrcset).toBe(
+      "https://cdn.example.com/https://my-image.com/image.jpg?sitemap_path=/some/path 1x, https://cdn.example.com/https://my-image.com/image@2x?sitemap_path=/some/path 2x"
     );
   });
 });

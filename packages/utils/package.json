@@ -1,6 +1,6 @@
 {
   "name": "@picperf/utils",
-  "version": "2.0.1",
+  "version": "2.3.0",
   "description": "Utilities for optimizing images with PicPerf.dev.",
   "license": "ISC",
   "author": "Alex MacArthur (https://macarthur.me)",
@@ -21,9 +21,9 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
   "devDependencies": {
-    "@types/node": "^20.11.30",
-    "prettier": "^3.2.5",
-    "vitest": "^1.4.0"
+    "@types/node": "^24.10.1",
+    "prettier": "^3.7.4",
+    "vitest": "^4.0.15"
   },
   "publishConfig": {
     "access": "public"

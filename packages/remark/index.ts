@@ -2,20 +2,22 @@ import { import_ } from "@brillout/import";
 import { transform } from "@picperf/utils";
 
 interface Options {
-  shouldTransform?: (url: string) => boolean;
   host?: string;
+  customDomain?: string;
+  shouldTransform?: (url: string) => boolean;
 }
 
 const defaultOptions: Options = {
-  shouldTransform: () => true,
   host: undefined,
+  customDomain: undefined,
+  shouldTransform: () => true,
 };
 
 export function remarkPicPerf(
-  options: Options = defaultOptions
+  options: Options = defaultOptions,
 ): (ast: any) => void {
   const mergedOptions = { ...defaultOptions, ...options };
-  const { host, shouldTransform } = mergedOptions;
+  const { host, shouldTransform, customDomain } = mergedOptions;
 
   return async (tree) => {
     const { visit } = await import_("unist-util-visit");
@@ -31,7 +33,7 @@ export function remarkPicPerf(
         return;
       }
 
-      node.url = transform({ path: src, host });
+      node.url = transform({ path: src, host, rootHost: customDomain });
     });
   };
 }

@@ -12,6 +12,14 @@ function setSitemapPathOnPath(path: string, sitemapPath: string): string {
   return url.replace("https://fake.com", "");
 }
 
+function applyProtocolIfMissing(url: string): string {
+  if (!/^https?:\/\//i.test(url)) {
+    return `https://${url}`;
+  }
+
+  return url;
+}
+
 function isValidUrl(url: string): boolean {
   try {
     new URL(url);
@@ -40,10 +48,12 @@ export function transform({
   // The purpose of this host is for use on relative paths.
   host,
   sitemapPath,
+  rootHost = PREFIX,
 }: {
   path: string;
   host?: string;
   sitemapPath?: string;
+  rootHost?: string;
 }): string {
   const url = host
     ? buildImageUrlWithHost({ imageUrl: host, imagePath: path, sitemapPath })
@@ -62,24 +72,26 @@ export function transform({
     return url;
   }
 
-  return `${PREFIX}/${url}`;
+  return `${applyProtocolIfMissing(rootHost)}/${url}`;
 }
 
 export function transformSrcset({
   value,
   host,
   sitemapPath,
+  rootHost,
 }: {
   value: string;
   host?: string;
   sitemapPath?: string;
+  rootHost?: string;
 }) {
   return value
     .split(",")
     .map((src) => {
       const [url, size] = src.trim().split(" ");
 
-      return `${transform({ path: url, host, sitemapPath })} ${size}`;
+      return `${transform({ path: url, host, sitemapPath, rootHost })} ${size}`;
     })
     .join(", ");
 }
